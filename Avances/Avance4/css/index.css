@@ -1,0 +1,133 @@
+.sidebar{
+	position: fixed;
+	top: 0;
+	bottom:0 ;
+	left: 0;
+	z-index:100;
+	padding: 50px 0 0;
+	background-color: #23272C;
+	font-family: "Roboto-Light";
+	overflow-x: hidden;
+	overflow-y: auto;
+
+}
+
+tr:nth-child(odd) { background-color : transparent; }
+tr:nth-child(even) { background-color : rgb(220,220,220); }
+tr:hover :not(th){ background-color : gray; }
+tr.selected :not(th) {background-color: gray}
+
+#titulo {
+	color: #23272C;
+}
+
+.titulo {
+	color: black;
+	font-family: "Roboto-Light";
+}
+
+.sidebar .nav-link {
+  font-weight: 500;
+  color: #D3D3D3;
+  border: 1px;
+ }
+
+ .sidebar li {
+ 	font-size: 11pt;
+ }
+
+ .sidebar i {
+ 	padding-right: 15px;
+ }
+
+
+.sidebar .nav-link:hover {
+	color: white;
+}
+
+.navLink {
+	color: #D3D3D3;
+}
+
+.icon {
+	font-size: 67pt;
+	color: #D3D3D3;
+}
+
+.nav {
+	border-top: 1px solid #808080;
+	margin-left: 10px;
+	margin-bottom: 20px;
+}
+
+.row button {
+	padding-left: 20px;
+	padding-right: 20px;
+	border:1px solid transparent;
+	background: transparent;
+}
+
+.iconPlus {
+	font-size: 30pt;
+	text-align: center;
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+.iconButton {
+	padding-right: 5px;
+}
+.row button:hover {
+	border: 1px solid #D3D3D3;
+}
+
+.row {
+	position: relative;
+}
+
+.titulo5 {
+	padding-left: 10px;
+	padding-top: 10px;
+}
+
+.textBox {
+	border: 1px solid #D3D3D3;
+	margin-right: 10px;
+	margin-left: 10px;
+}
+
+.textBox:focus {
+	outline: none;
+}
+
+.row input {
+	position: absolute;
+	right:10px;
+	bottom: 2px;
+}
+
+.row button:focus {
+	outline: none;
+}
+
+.buscarButton:focus {
+	outline: none;
+}
+
+.tituloNav {
+	color: #808080;
+	font-family: "Roboto-Light";
+	font-size: 10pt;
+	margin-left: 10px;
+}
+
+body {
+	background-color: #f1f3f4;
+	font-family: "Roboto-Light"
+}
+
+@font-face {
+	font-family: 'Roboto-Light';
+	src: url(Roboto-Light.ttf);
+}
+

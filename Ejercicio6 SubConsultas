@@ -1,0 +1,26 @@
+1.-
+SELECT nombre FROM actores WHERE sexo = 'femenino' AND nombre IN (SELECT nombre FROM elenco WHERE titulo='brujas de salem');
+SELECT nombre FROM actores,elenco WHERE actores.nombre=elenco.nombre AND actores.sexo = "femenino" and elenco.titulo = "Brujas de salem";
+
+2.-
+SELECT nombre FROM actores WHERE sexo="Masculino" AND nombre IN (SELECT nombre from elenco, peliculas WHERE peliculas.titulo=elenco.titulo AND elenco.año=1995 and peliculas.nomEstudio="MGM");
+
+SELECT nombre FROM actores WHERE sexo="Masculino" AND actores.nombre=e peliculas.titulo=elenco.titulo AND elenco.año=1995 and peliculas.nomEstudio="MGM");
+
+3.-
+SELECT titulo FROM peliculas WHERE duracion>(SELECT duracion FROM Peliculas WHERE titulo="Lo que el viento se llevó" AND año=1939)
+
+No hay
+
+4.- 
+SELECT nombre from productores, peliculas WHERE peliculas.idProductor=productor.idProductor group by idProductor having count(Peliculas.nombre)>(SELECT count(peliculas.titulos) from productores, peliculas WHERE pelicula.idProductor=peliculas.idProductor AND productor.nombre='George Lucas' group by idproductores)
+No hay
+5.-
+SELECT nombre from productores where nombre IN (SELECT productores.nombre FROM productores, pelicula, elenco WHERE peliculas.idProductor=productores.idProductor AND peliculas.titulo=elenco.titulo AND elenco.nombre="Sharon Stone");
+
+SELECT productores.nombre FROM productores, pelicula, elenco WHERE peliculas.idProductor=productores.idProductor AND peliculas.titulo=elenco.titulo AND elenco.nombre="Sharon Stone"
+
+6.-
+SELECT titulo FROM peliculas WHERE titulo IN ( SELECT titulo FROM peliculas GROUP BY titulo HAVING COUNT(peliculas.año)<2  )
+
+SELECT titulo FROM peliculas GROUP BY titulo HAVING COUNT(peliculas.año)<2 

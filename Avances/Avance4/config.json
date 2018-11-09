@@ -1,0 +1,4 @@
+{
+	"database":{"hostname":"localhost", "user":"root", "password":"", "port":"3306", "database":"cbtis118"},
+	"files":{"directoy":"static","css":"css","js":"js","templates":"templates","uploads":"uploads"}
+}

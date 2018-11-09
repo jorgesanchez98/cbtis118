@@ -1,0 +1,14 @@
+<aside class="col-md-2 d-none d-md-block sidebar">
+				<div class="row justify-content-md-center">
+					<div class="col col-md-6">
+					<span class="icon"><i class="fas fa-user"></i></span>
+					</div>
+					<p class="text-white">Bienvenido <?php echo $session->nombre; ?> </p>
+				</div>
+				<nav class="sidebar-sticky">
+				
+					<?php 
+				     echo sidebarFunc($session->rol);
+					?>
+				</nav>
+			</aside>

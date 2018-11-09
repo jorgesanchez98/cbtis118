@@ -1,0 +1,48 @@
+SELECT SUM(Sueldos), Nombre
+FROM Elenco
+GROUP BY Nombre
+
+----------------------------------------
+
+CREATE VIEW Presupuesto_Estudio AS
+SELECT nomEstudio, SUM(presupuesto) as 'Suma Presupuesto'
+FROM Pelicula
+GROUP BY nomEstudio
+
+SELECT 'Suma Presupuesto', nomEstudio, Año
+FROM 'Presupuesto_Estudio' PE, Pelicula P
+WHERE PE.nomEstudio=P.nomEstudio AND P.año>1979 AND p.año<1979
+
+------------------------------------------------------
+
+CREATE VIEW Sueldo_Actor AS
+SELECT AVG(Sueldo) as 'Sueldo Promedio' , Nombre
+FROM Elenco E
+GROUP BY Nombre
+HAVING 'Sueldo Promedio'>5000000
+
+SELECT 'Sueldo Promedio' , Nombre, Sexo
+FROM 'Sueldo_Actor' SA, Actor A
+WHERE SA.Nombre=A.Nombre AND A.Sexo=Hombre
+
+-----------------------------------
+
+CREATE VIEW Presupuesto_Pelicula AS
+SELECT MIN(Presupuesto) as 'Presupuesto Minimo', Titulo
+FROM Pelicula
+GROUP BY Titulo
+
+SELECT 'Presupuesto Minimo', Titulo, Año
+FROM 'Presupuesto_Pelicula' PP, Pelicula P
+WHERE PP.Titulo=P.Titulo
+
+---------------------------------------
+
+CREATE VIEW Sueldos_Actrices AS
+SELECT Sueldo, Nombre, Sexo
+FROM ELENCO E, ACTOR A
+WHERE E.Nombre=A.Nombre AND A.Sexo='Mujer'
+ORDER BY Sueldo ASC
+
+SELECT TOP 1 * FROM
+Sueldos_Actrices

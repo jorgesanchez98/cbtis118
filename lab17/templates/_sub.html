@@ -1,0 +1,21 @@
+<div class="d-flex justify-content-between flex-wrap text-white flex-md-nowrap align-items-center pl-5 pt-3 pb-2 mb-3 border-bottom">
+					<h1 class="titulo">Roles</h1>
+				</div>
+				<section class="row">
+							<button> <i class="fas fa-download iconButton"></i>Descargar</button>
+							<input class="buscarButton" type="text" name="buscar" placeholder="Buscar">
+						</section>
+					<div class="container">
+						<form action="index.php" method="GET">
+							<input type="hidden" name="module" value="Sub-consultas">
+							<select name="consulta">
+								<option value="1">Consulta de monto de transacción</option>
+								<option value="2">Consulta de transacciones por nombre</option>
+								<option value="3">Personal habilitado por fechas</option>
+								<option value="4">Áreas de trabajo</option>
+								<option value="5">Transacciones por tipo</option>
+								<option value="6">Información de cuenta por nombre.</option>
+							</select>
+							<input type="submit" name="Ir" >
+						</form>
+					</div>
