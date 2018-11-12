@@ -1,4 +1,4 @@
--- phpMyAdmin SQL Dump
+﻿-- phpMyAdmin SQL Dump
 -- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
@@ -480,7 +480,7 @@ ALTER TABLE `turnos`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `idUsuario` mediumint(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idUsuario` mediumint(255) NOT NULL AUTO_INCREMENT;
 
 --
 -- Restricciones para tablas volcadas

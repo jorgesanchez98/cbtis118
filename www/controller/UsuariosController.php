@@ -32,7 +32,8 @@ class UsuariosController extends ControladorBase{
         if(isset($_POST["nombre"])){
             $usuario=new Usuario($this->adapter);
             $usuario->setNombre($_POST["nombre"]);
-            $usuario->setApellido($_POST["apellido"]);
+            $usuario->setPaterno($_POST["paterno"]);
+            $usuario->setMaterno($_POST["materno"]);
             $usuario->setEmail($_POST["email"]);
             $usuario->setPassword(sha1($_POST["password"]));
             $save=$usuario->save();
