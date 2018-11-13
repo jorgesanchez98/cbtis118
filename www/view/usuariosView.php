@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+	<!DOCTYPE html>
 <html>
 <head>
 	<?php include'header.php'; ?>
@@ -55,7 +55,7 @@
         </button>
       </div>
       <div class="modal-body mx-3">
-      	<form action="UsuariosController.php" method="POST">
+      	<form action="<?php echo $helper->url("Usuarios","crear"); ?>" method="POST">
         <div class="md-form mb-5">
           <input name="nombre" type="text" id="orangeForm-name" class="form-control validate">
           <i class="fa fa-user prefix grey-text"></i><label data-error="wrong" data-success="right" for="orangeForm-name"> Nombre</label>
@@ -73,14 +73,27 @@
           <i class="fa fa-envelope prefix grey-text"></i><label data-error="wrong" data-success="right" for="orangeForm-email"> Email</label>
         </div>
 
-        <div class="md-form mb-4">
+        <div class="md-form mb-5">
           <input name="password" type="password" id="orangeForm-pass" class="form-control validate">
           <i class="fa fa-lock prefix grey-text"></i><label data-error="wrong" data-success="right" for="orangeForm-pass"> Contraseña</label>
         </div>
-        </form>
+        <div class="md-form mb-5">
+        <div class="form-group">
+		    <label for="exampleFormControlSelect1">Rol Asignado</label>
+		    <select class="form-control" id="exampleFormControlSelect1" name="idRol">
+		      <option value="1">Administrador</option>
+		      <option value="2">Usuario</option>
+			  </select>
+		</div>
+		</div>
+        <div class="text-center">
+        <div class="md-form mb-5">
+        <button type="submit" class="btn btn-deep-orange">Registrar</button>
+    	</div>
+    	</div>
+		</form>
       </div>
       <div class="modal-footer d-flex justify-content-center">
-        <a href="index.php?controller=Usuarios&action=crear"><button class="btn btn-deep-orange">Registrar</button></a>
       </div>
     </div>
   </div>

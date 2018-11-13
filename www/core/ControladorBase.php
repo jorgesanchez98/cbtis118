@@ -2,6 +2,7 @@
 class ControladorBase{
  
     public function __construct() {
+        session_start();
         require_once 'Conectar.php';
         require_once 'EntidadBase.php';
         require_once 'ModeloBase.php';

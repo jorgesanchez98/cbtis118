@@ -80,12 +80,13 @@ class Usuario extends EntidadBase{
     }
  
     public function save(){
-        $query="INSERT INTO usuarios (nombre,paterno, materno ,email,password) VALUES (
+        $query="INSERT INTO usuarios (nombre,paterno, materno ,email, password, idRol) VALUES (
                        '".$this->nombre."',
                        '".$this->paterno."',
                        '".$this->materno."',
                        '".$this->email."',
-                       '".$this->password."');";
+                       '".$this->password."',
+                       '".$this->idRol."');";
         $save=$this->db()->query($query);
         return $save;
     }

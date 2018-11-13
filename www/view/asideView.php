@@ -7,7 +7,7 @@
 				</div>
 
 				<nav class="sidebar-sticky">
-					<p class="text-white ml-3">Bienvenido usuario</p>
+					<p class="text-white ml-3">Bienvenido usuario 		<?= var_dump($_SESSION);?></p>
 					<span class="tituloNav">Importar</span>
 					<ul class="nav flex-column">
 						<li class="nav-item"><a class="nav-link" href="<?php echo $helper->url("Importar","index"); ?>"><i class="fas fa-arrow-circle-up"></i>Calificaciones</a></li>
