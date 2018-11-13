@@ -90,6 +90,18 @@ class Usuario extends EntidadBase{
         $save=$this->db()->query($query);
         return $save;
     }
- 
+
+    public function checkUserPass($allusers, $nombre, $password){
+        foreach ($allusers as $user) {
+            if($user->nombre==$nombre&&$user->password==sha1($password)){
+                if($user->idRol==1)
+                    return "Administracion";
+                else{
+                    return "Usuario";
+                }
+            }
+        }
+        return false;
+    }
 }
 ?>

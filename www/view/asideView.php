@@ -7,7 +7,8 @@
 				</div>
 
 				<nav class="sidebar-sticky">
-					<p class="text-white ml-3">Bienvenido usuario 		<?= var_dump($_SESSION);?></p>
+					<p class="text-white ml-3">Bienvenido usuario <?=$_SESSION["nombre"];?>
+					</p>
 					<span class="tituloNav">Importar</span>
 					<ul class="nav flex-column">
 						<li class="nav-item"><a class="nav-link" href="<?php echo $helper->url("Importar","index"); ?>"><i class="fas fa-arrow-circle-up"></i>Calificaciones</a></li>
@@ -27,12 +28,13 @@
 						<li class="nav-item"><a class="nav-link" href="<?php echo $helper->url("Inventario","index"); ?>"> <i class="fas fa-file-alt"></i>Inventarios</a></li>
 						<li class="nav-item"><a class="nav-link" href="<?php echo $helper->url("Mobiliario","index"); ?>"> <i class="fas fa-file-alt"></i>Mobiliarios</a></li>
 					</ul>
-					
+					<?php if ($_SESSION["rol"]=="Administracion"):?>
 					<span class="tituloNav">Administración</span>
 					<ul class="nav flex-column">
 						<li class="nav-item"><a class="nav-link" href="<?php echo $helper->url("Usuarios","index"); ?>"> <i class="fas fa-user-alt"></i>Usuarios</a></li>
 						<li class="nav-item"><a class="nav-link" href="<?php echo $helper->url("Roles","index"); ?>"> <i class="fas fa-file-alt"></i>Roles</a></li>
 					</ul>
+					<?php endif; ?>
 					<span class="tituloNav">Configuración</span>
 					<ul class="nav flex-column">
 						<li class="nav-item"><a class="nav-link" href="<?php echo $helper->url("Login","index"); ?>"> <i class="fas fa-sign-out-alt"></i>Salir</a></li>

@@ -10,13 +10,30 @@ class LoginController extends ControladorBase{
     }
      
     public function index(){
-        if (isset($_POST["nombre"]))
-            $_SESSION["nombre"]=$_POST["nombre"];
         $array = array(
             "foo" => "bar",
             "bar" => "foo",
             );
         $this->view("login", $array);
+    }
+
+    public function login(){
+        $usuario = new Usuario($this->adapter);
+        $allusers = $usuario->getAll();
+        if (isset($_POST["nombre"])&&$_POST["nombre"]!=""){
+            if (($_SESSION["rol"]=$usuario->checkUserPass($allusers, $_POST["nombre"], $_POST["password"]))!=false) {
+                $_SESSION["nombre"]=$_POST["nombre"];
+                
+                $this->redirect("Importar", "index");
+            }
+            else{
+                $this->redirect("login", "index");
+            }
+        }
+        else{
+            $this->redirect("login", "index");
+        }
+        
     }
 }
 ?>
