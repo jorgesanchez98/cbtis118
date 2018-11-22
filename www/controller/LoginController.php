@@ -23,7 +23,6 @@ class LoginController extends ControladorBase{
         if (isset($_POST["nombre"])&&$_POST["nombre"]!=""){
             if (($_SESSION["rol"]=$usuario->checkUserPass($allusers, $_POST["nombre"], $_POST["password"]))!=false) {
                 $_SESSION["nombre"]=$_POST["nombre"];
-                
                 $this->redirect("Importar", "index");
             }
             else{
