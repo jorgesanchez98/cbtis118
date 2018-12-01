@@ -80,15 +80,28 @@ class Usuario extends EntidadBase{
     }
  
     public function save(){
-        $query="INSERT INTO usuarios (id,nombre,apellido,email,password)
-                VALUES(NULL,
+        $query="INSERT INTO usuarios (nombre,paterno, materno ,email, password, idRol) VALUES (
                        '".$this->nombre."',
-                       '".$this->apellido."',
+                       '".$this->paterno."',
+                       '".$this->materno."',
                        '".$this->email."',
-                       '".$this->password."');";
+                       '".$this->password."',
+                       '".$this->idRol."');";
         $save=$this->db()->query($query);
         return $save;
     }
- 
+
+    public function checkUserPass($allusers, $nombre, $password){
+        foreach ($allusers as $user) {
+            if($user->nombre==$nombre&&$user->password==sha1($password)){
+                if($user->idRol==1)
+                    return "Administracion";
+                else{
+                    return "Usuario";
+                }
+            }
+        }
+        return false;
+    }
 }
 ?>

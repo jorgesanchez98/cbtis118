@@ -2,6 +2,7 @@
 class ControladorBase{
  
     public function __construct() {
+        session_start();
         require_once 'Conectar.php';
         require_once 'EntidadBase.php';
         require_once 'ModeloBase.php';
@@ -17,7 +18,6 @@ class ControladorBase{
         foreach ($datos as $id_assoc => $valor) {
             ${$id_assoc}=$valor;
         }
-         
         require_once 'core/AyudasVistas.php';
         $helper = new AyudasVistas();
      

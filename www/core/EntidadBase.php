@@ -17,9 +17,11 @@ class EntidadBase{
     public function db(){
         return $this->db;
     }
-     
-    public function getAll(){
+
+    public function getUsers(){
         $query=$this->db->query("SELECT * FROM $this->table");
+
+        $resultSet = [];
 
         while ($row = $query->fetch_object()) {
            $resultSet[]=$row;
@@ -28,8 +30,22 @@ class EntidadBase{
         return $resultSet;
     }
      
-    public function getById($id){
-        $query = $this->db->query("SELECT * FROM $this->table WHERE idRol=$id");
+    public function getAll($idNombre){
+        $query=$this->db->query("SELECT * FROM $this->table ORDER BY $idNombre DESC");
+
+        $resultSet = [];
+
+        while ($row = $query->fetch_object()) {
+           $resultSet[]=$row;
+        }
+         
+        return $resultSet;
+    }
+     
+    public function getById($id, $idNombre){
+        $query = $this->db->query("SELECT * FROM $this->table WHERE $idNombre=$id");
+
+        $resultSet = [];
  
         if($row = $query->fetch_object()) {
            $resultSet=$row;
@@ -40,6 +56,8 @@ class EntidadBase{
      
     public function getBy($column,$value){
         $query=$this->db->query("SELECT * FROM $this->table WHERE $column='$value'");
+
+        $resultSet = [];
  
         while($row = $query->fetch_object()) {
            $resultSet[]=$row;
@@ -48,8 +66,8 @@ class EntidadBase{
         return $resultSet;
     }
      
-    public function deleteById($id){
-        $query=$this->db->query("DELETE FROM $this->table WHERE id=$id");
+    public function deleteById($id, $idNombre){
+        $query=$this->db->query("DELETE FROM $this->table WHERE $idNombre=$id");
         return $query;
     }
      

@@ -2,13 +2,31 @@
 	class Archivo extends EntidadBase {
 
 		private $idArchivo;
+        private $ruta;
+        private $nombre;
 		private $idTipoArchivo;
-		private $hash;
+		private $cicloEscolar;
 		private $fecha;
         
         public function __construct($adapter) {
-            $table = "Archivos";
+            $table = "archivos";
             parent::__construct($table, $adapter);
+        }
+
+        public function getRuta () {
+            return $this->ruta;
+        }
+
+        public function setRuta ($id) {
+            $this->ruta = $id;
+        }
+
+        public function getNombre () {
+            return $this->nombre;
+        }
+
+        public function setNombre ($id) {
+            $this->nombre = $id;
         }
 
     	public function getIdArchivo () {
@@ -27,30 +45,29 @@
     		$this->idTipoArchivo = $id;
     	}
 
-    	public function getHash () {
-    		return $this->hash;
-    	}
-        
-    	public function setHash ($id) {
-    		$this->hash = $id;
-    	}
-
     	public function getFecha () {
     		return $this->fecha;
     	}
-
+        
     	public function setFecha ($id) {
     		$this->fecha = $id;
     	}
 
-    	public function insert ($values) {
-    		$this->insert($values);
+    	public function getCicloEscolar () {
+    		return $this->cicloEscolar;
+    	}
+
+    	public function setCicloEscolar ($id) {
+    		$this->cicloEscolar = $id;
     	}
 
         public function save(){
-        $query="INSERT INTO Archivos (idTipoArchivo, hash)VALUES(
+        $query="INSERT INTO archivos VALUES(NULL,
                 '".$this->idTipoArchivo."',
-                '".$this->hash."');";
+                '".$this->nombre."',
+                '".$this->ruta."',
+                '".$this->cicloEscolar."',
+                '".$this->fecha."');";
         $save=$this->db()->query($query);
         return $save;
     }
