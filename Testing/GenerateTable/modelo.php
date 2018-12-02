@@ -16,15 +16,18 @@
 		$conexion=connect();
 		$results=$conexion->query($query);
 		$headers=$results->fetch_fields();
-		$table='<table><thead><tr>';
+		$table='<table class="table"><thead><tr>';
 		foreach ($headers as $head) {
-			$table.='<th>'.$head->name.'</th>';	
+			$table.='<th scope="col">'.$head->name.'</th>';	
 		}
 		$table.='</tr></thead><tbody>';
-		while ($row=mysqli_fetch_array($results, MYSQLI_BOTH)) {
+		while ($row=mysqli_fetch_array($results, MYSQLI_NUM)) {
 			$table.='<tr>';
-			for ($i=0; $i<sizeof($row)/2; $i++) { 
+			/*for ($i=0; $i<sizeof($row); $i++) { 
 				$table.='<td>'.$row[$i].'</td>';
+			}*/
+			foreach ($row as $data) {
+				$table.='<td>'.$data.'</td>';
 			}
 			$table.='</tr>';
 			$some=sizeof($row);
