@@ -1,4 +1,4 @@
 <?php
-define("CONTROLADOR_DEFECTO", "Usuarios");
+define("CONTROLADOR_DEFECTO", "Importar");
 define("ACCION_DEFECTO", "index");
 ?>

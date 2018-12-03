@@ -13,7 +13,7 @@ class UsuariosController extends ControladorBase{
          
         $usuario = new Usuario($this->adapter);
          
-        $allusers = $usuario->getAll();
+        $allusers = $usuario->getAll("idUsuario");
 
         $this->view("usuarios",array(
             "allusers"=>$allusers
@@ -23,18 +23,20 @@ class UsuariosController extends ControladorBase{
     public function getRol ($id) {
         $rol = new Rol($this->adapter);
 
-        $res = $rol->getById($id);
+        $res = $rol->getById($id, "idRol");
 
         return $res->nombre;
     }
      
     public function crear(){
-        if(isset($_POST["nombre"])){
+        if(isset($_POST["nombre"])&&isset($_POST["paterno"])&&isset($_POST["materno"])&&isset($_POST["email"])&&isset($_POST["password"])&&isset($_POST["idRol"])&&$_POST["nombre"]!=""&&$_POST["paterno"]!=""&&$_POST["materno"]!=""&&$_POST["email"]!=""&&$_POST["password"]!=""&&$_POST["idRol"]!=""){
             $usuario=new Usuario($this->adapter);
             $usuario->setNombre($_POST["nombre"]);
-            $usuario->setApellido($_POST["apellido"]);
+            $usuario->setPaterno($_POST["paterno"]);
+            $usuario->setMaterno($_POST["materno"]);
             $usuario->setEmail($_POST["email"]);
             $usuario->setPassword(sha1($_POST["password"]));
+            $usuario->setIdRol($_POST["idRol"]);
             $save=$usuario->save();
         }
         $this->redirect("Usuarios", "index");

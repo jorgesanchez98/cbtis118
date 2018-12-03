@@ -9,13 +9,48 @@ class FormatosController extends ControladorBase{
     	$this->conectar = new Conectar();
         $this->adapter = $this->conectar->conexion();
     }
+
+    public function redirectIndex() {
+        echo "hola";
+        $this->redirect("Formatos", "index");
+    }
      
     public function index(){
-        $array = array(
-            "foo" => "bar",
-            "bar" => "foo",
-            );
-        $this->view("formatos", $array);
+        $formato = new Formato($this->adapter);
+         
+        $allformatos = $formato->getAll("idFormato");
+
+        if (isset($_SESSION["nombre"])){
+            $this->view("formatos",array(
+            "allformatos"=>$allformatos
+            ));
+        }
+        else {
+            $this->redirect("login", "index");
+        }
     }
+
+    public function subirFormato () {
+        if (isset($_POST["submit"])){
+            $formato = new Formato($this->adapter);
+            $formato->setNombre($_POST["nombre"]);
+            $formato->setDescripcion($_POST["descripcion"]);
+            $formato->save();
+        }
+        $this->redirect("Formatos", "index");
+    }
+
+    public function borrar ($id) {
+      $formato = new Formato($this->adapter);
+
+      if ($formato->deleteById($id, "idFormato")){
+        //$allformatos = $formato->getAll("idArchivo");
+        $this->redirect("Formatos", "index");
+      }
+      else {
+        trigger_error("Fatal error", E_USER_ERROR);
+      }
+    }
+
 }
 ?>

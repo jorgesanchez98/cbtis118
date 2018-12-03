@@ -3,14 +3,27 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 31-10-2018 a las 05:14:31
+-- Tiempo de generación: 01-11-2018 a las 05:12:06
 -- Versión del servidor: 10.1.36-MariaDB
 -- Versión de PHP: 7.2.10
+
+/*CREATE TABLE alumnos (
+  idAlumno int(10) NOT NULL AUTO_INCREMENT,
+    sexo char(1) NOT NULL,
+    CURP char(18) NOT NULL,
+    generacion varchar(10) NOT NULL,
+    turno varchar(10) NOT NULL,
+    carrera varchar(30) NOT NULL,
+    semestre int(2) NOT NULL,
+    numMaterias int(2) NOT NULL,
+    calificacionTotal int(3) NOT NULL,
+    PRIMARY KEY (idAlumno)
+)ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
 START TRANSACTION;
-SET time_zone = "+00:00";
+SET time_zone = "+00:00";*/
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -137,11 +150,22 @@ CREATE TABLE `alumnos` (
 --
 
 CREATE TABLE `archivos` (
-  `idArchivo` int(10) NOT NULL,
+  `idArchivo` mediumint(255) NOT NULL,
   `idTipoArchivo` int(10) NOT NULL,
-  `hash` char(255) NOT NULL,
-  `fecha` datetime DEFAULT CURRENT_TIMESTAMP
+  `nombre` varchar(60) NOT NULL,
+  `ruta` char(40) NOT NULL,
+  `cicloEscolar` varchar(30) NOT NULL,
+  `fecha` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `archivos`
+--
+
+INSERT INTO `archivos` (`idArchivo`, `idTipoArchivo`, `nombre`, `ruta`, `cicloEscolar`, `fecha`) VALUES
+(1, 1, 'Estudiantes', '23456789.12345', '2018-2019', '2018-10-09'),
+(2, 1, 'Nuevo Excel', '5bda7aa9c0e166.80300078.xlsx', '2016-2017', '2018-11-01'),
+(3, 1, 'Prueba Importar', '5bda7af723dc75.98000917.xlsx', '2016-2017', '2018-11-01');
 
 -- --------------------------------------------------------
 
@@ -265,6 +289,13 @@ CREATE TABLE `tiposarchivo` (
   `nombre` char(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `tiposarchivo`
+--
+
+INSERT INTO `tiposarchivo` (`idTipoArchivo`, `nombre`) VALUES
+(1, 'Detalle Calificación');
+
 -- --------------------------------------------------------
 
 --
@@ -318,7 +349,6 @@ ALTER TABLE `alumnos`
 --
 ALTER TABLE `archivos`
   ADD PRIMARY KEY (`idArchivo`),
-  ADD UNIQUE KEY `hash` (`hash`),
   ADD KEY `idTipoArchivo` (`idTipoArchivo`);
 
 --
@@ -414,7 +444,7 @@ ALTER TABLE `alumnos`
 -- AUTO_INCREMENT de la tabla `archivos`
 --
 ALTER TABLE `archivos`
-  MODIFY `idArchivo` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `idArchivo` mediumint(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `carreras`
@@ -468,7 +498,7 @@ ALTER TABLE `sexos`
 -- AUTO_INCREMENT de la tabla `tiposarchivo`
 --
 ALTER TABLE `tiposarchivo`
-  MODIFY `idTipoArchivo` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `idTipoArchivo` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `turnos`

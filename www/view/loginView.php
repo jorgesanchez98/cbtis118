@@ -14,17 +14,19 @@
 				<img src="https://raw.githubusercontent.com/google/material-design-icons/master/action/2x_web/ic_lock_black_48dp.png">
 				
 				<h2 class="h2 mb-3">Inicio de sesión</h2>
+				<form action="<?php echo $helper->url("login","login"); ?>" method="POST">
 				<div class="form-group">
-					<input class="login-input" type="text" name="user" placeholder="usuario">
+					<input class="login-input" type="text" name="nombre" placeholder="usuario">
 				</div>
 				<div class="form-group">
-					<input class="login-input" type="password" name="contraseña" placeholder="contraseña">
+					<input class="login-input" type="password" name="password" placeholder="contraseña">
 				</div>
-				<div class="form-group">
-					<input type="checkbox">
-					<label>Conservar sesión</label>
-				</div>
-				  <a class="btn btn-primary" href="<?php echo $helper->url("Importar","index"); ?>">Entrar</a>
+ 				  <div class="text-center">
+			      <button type="submit" class="btn btn-primary">Registrar</button>
+			      </div> 
+			   	  </form>
+
+			      </div>
 			</div>
 		</main>	
 		<footer>
