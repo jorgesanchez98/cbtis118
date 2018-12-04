@@ -11,6 +11,18 @@ $(document).ready(() => {
 		}
 	});
 
+	$('#descargarArchivo').click(function(){
+		if (selectedId != 0){
+			$.get('index.php', {id: selectedId, controller: 'Importar', action: 'getArchivo'}).done(function(data,status){
+				var string = data;
+				var strings = string.split(',');
+				//console.log(data);
+				//console.log(strings[1]);
+				window.location.href = 'baseDatos/excel/' + strings[1];
+			});
+		}
+	});
+
 	$('#editarPregunta').click(function(){
 		if (selectedId != 0){
 			var id = document.getElementById('idFormato').value;
@@ -30,29 +42,84 @@ $(document).ready(() => {
 	});
 
 	$('tr').click(function(){
-    	$(this).addClass('selected').siblings().removeClass('selected');
-    	selectedId = $(this).attr('id');
+		if (document.getElementById('rowColor').value == 1){
+			$(this).addClass('selected').siblings().removeClass('selected');
+    		selectedId = $(this).attr('id');
+		}
 	});
 
 	$('#borrar').click(function(){
-		$.post('index.php', {id: selectedId, controller: 'Importar', action: 'borrar'}).done(function(data,status) {
-			//document.getElementById('table').innerHTML = '<?php foreach($allarchivos as $archivo){?><tr id='<?php echo $archivo->idArchivo?>'><td><?php echo $archivo->nombre ?></td><td><?php echo $this->getTipoArchivo($archivo->idTipoArchivo) ?></td><td><?php echo $archivo->fecha ?></td><td><?php echo $archivo->cicloEscolar ?></td></tr> <?php } ?>';
-			location.reload();
-		});
+		if (selectedId != 0){
+			$.post('index.php', {id: selectedId, controller: 'Importar', action: 'borrar'}).done(function(data,status) {
+				location.reload();
+			});
+		}				
+	});
+
+	$('#visualizarPregunta').click(function(){
+		if (selectedId != 0){
+			$.get('index.php', {id:selectedId, controller: 'Consultas', action: 'visualizarPregunta'}).done(function(data,status){
+				document.getElementById('tablePregunta').innerHTML = data;
+				$('#visualizarPreguntaModal').modal('show');
+			
+			});
+		}
+	});
+
+	$('#visualizarFormato').click(function(){
+		if (selectedId != 0){
+			location.replace('index.php?controller=Consultas&action=visualizarFormato&id=' + selectedId);
+			/*$.get('index.php', {id:selectedId, controller:'Consultas', action: 'visualizarFormato'}).done(function(data,status){
+				console.log()
+			});*/
+		}
+	});
+
+	$('#borrarPregunta').click(function(){
+		if (selectedId != 0){
+			$.post('index.php', {id: selectedId, controller: 'Preguntas', action: 'borrar'}).done(function(data,status){
+				location.reload();
+				//console.log(data);
+			});
+		}
 	});
 
 	$('#borrarFormato').click(function(){
-		$.post('index.php', {id: selectedId, controller: 'Formatos', action: 'borrar'}).done(function(data,status){
-			location.reload();
-		});
+		if (selectedId != 0){
+			$.post('index.php', {id: selectedId, controller: 'Formatos', action: 'borrar'}).done(function(data,status){
+				location.reload();
+			});
+		}
 	});
 
 	$('#borrarConsulta').click(function(){
 		//var idPregunta = document.getElementById('idPregunta').value;
 		//var idFormato = document.getElementById('idFormato').value;
-		$.post('index.php', {controller: 'Consultas', action: 'borrar', id: selectedId}).done(function(data,status){
-			location.reload();
-		});
+		if (selectedId != 0){
+			$.post('index.php', {controller: 'Consultas', action: 'borrar', id: selectedId}).done(function(data,status){
+				location.reload();
+			});
+		}
+	});
+
+	$('#cargarBaseDatos').click(function(){
+		if (selectedId != 0){
+			$('#loaderModal').modal('show');
+			$.post('index.php', {id: selectedId, controller: 'Importar', action: 'cargarBaseDatos'}).done(function(data,status){
+				var string = data;
+				var strings = string.split(",");
+				if (strings[1] == "success"){
+					document.getElementById("loader").style.display = "none";
+ 					document.getElementById("myDiv").style.display = "block";
+ 					document.getElementById('status').innerHTML = "Se ha cargado la base de datos exitosamente.";
+				}
+				else {
+					document.getElementById("loader").style.display = "none";
+  					document.getElementById("myDiv").style.display = "block";
+  					document.getElementById('status').innerHTML = "Ocurrió un error al cargar la base de datos.";
+				}
+			});
+		}
 	});
 
 	$('#editarConsulta').click(function(){
@@ -61,7 +128,7 @@ $(document).ready(() => {
 				var string = data;
 				var strings = string.split(',');
 				var total = strings[3];
-				//console.log(strings);
+				console.log(strings);
 				addDiv(total - 1);
 				document.getElementById('descripcion').value = strings[1];
 				document.getElementById('ordenarSelect').value = strings[2];
@@ -85,6 +152,16 @@ $(document).ready(() => {
 				document.getElementById('editando').value = 1;
 				document.getElementById('idConsulta').value = selectedId;
 				$('#modal').modal('show');
+			});
+		}
+	});
+
+	$('#visualizarConsulta').click(function(){
+		if (selectedId != 0){
+			$.post('index.php', {controller: 'Consultas', action: 'consulta', id: selectedId}).done(function(data,status){
+				console.log(data);
+				document.getElementById('tableConsulta').innerHTML = data;
+				$('#visualizarCon').modal('show');
 			});
 		}
 	});
@@ -154,8 +231,8 @@ $(document).ready(() => {
 	$( '#add' ).unbind( 'click' );
 
 
+
 	$('#add').click(function(){
-		//document.getElementById('nuevo').innerHTML +=  "<label class='col-sm-2 col-form-label'>Conector</label><select class='form-control' name='conjunto[]'> <option selected value='0'></option> <option value='AND'> AND</option> <option value='OR'> OR</option> </select><label class='col-sm-2 col-form-label'>Criterio</label> <select class='form-control' name='criteria[]'> <option selected value='0'></option> <option value='Total'> Total</option> <option value='Sexo'> Sexo</option><option value='calificacionTotal'> Calificacion</option><option value='Carrera'> Carrera</option></select><label class='col-sm-2 col-form-label'>Operador</label>	 <select class='form-control' name='operador[]'> <option selected value='0'></option><option value='>'> ></option> <option value='<'> <</option><option value='='> =</option> </select>	<div class='form-group row'> <label for='inputPassword' class='col-sm-2 col-form-label'>Valor</label> <div class='col-sm-10'> <input type='text' class='form-control' id='inputPassword' name='valor[]'> </div>	</div>"				
 		var string = "";
 						string += "<hr>"
 						string += "<div class='form-group row'>";
@@ -177,10 +254,12 @@ $(document).ready(() => {
             			string += "<div class='col-9'>";
 							string += "<select class='form-control' name='criteria[]'>";
     							string += "<option selected value='0'></option>";
-    							string += "<option value='1'> Total</option>";
-    							string += "<option value='2'> Sexo</option>";
-    							string += "<option value='3'> Calificacion</option>";
-    							string += "<option value='4'> Carrera</option>";
+    							string += "<option value='1'> Sexo</option>";
+    							string += "<option value='2'> Carrera</option>";
+    							string += "<option value='3'> Turno</option>";
+    							string += "<option value='4'> Materias Aprobadas</option>"
+                                string += "<option value='5'> Materias Reprobadas</option>"
+                                string += "<option value='6'> Nacido en el Extranjero</option>"
     						string += "</select>";
     					string += "</div>";
     				string += "</div>";
@@ -212,7 +291,10 @@ $(document).ready(() => {
   		numDiv++;
 	});
 
+
+
 	function addDiv (times){
+		numDiv = times;
 		for (var i = 0; i < times; i++){
 			var string = "";
 						string += "<hr>"
@@ -234,11 +316,13 @@ $(document).ready(() => {
             			string += "</div>";
             			string += "<div class='col-9'>";
 							string += "<select class='form-control' name='criteria[]'>";
-    							string += "<option selected value='0'></option>";
-    							string += "<option value='1'> Total</option>";
-    							string += "<option value='2'> Sexo</option>";
-    							string += "<option value='3'> Calificacion</option>";
-    							string += "<option value='4'> Carrera</option>";
+								string += "<option selected value='0'></option>";
+    							string += "<option value='1'> Sexo</option>";
+    							string += "<option value='2'> Carrera</option>";
+                                string += "<option value='3'> Turno</option>";
+                                string += "<option value='4'> Materias Aprobadas</option>";
+                                string += "<option value='5'> Materias Reprobadas</option>";
+                                string += "<option value='6'> Nacido en el Extranjero</option>";
     						string += "</select>";
     					string += "</div>";
     				string += "</div>";

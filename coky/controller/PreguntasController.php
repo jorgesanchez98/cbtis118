@@ -47,16 +47,25 @@ class PreguntasController extends ControladorBase{
         $this->redirectParametro("Preguntas", "index", $_POST["idFormato"]);
     }
 
-    public function borrar ($id) {
-      $formato = new Formato($this->adapter);
-
-      if ($formato->deleteById($id, "idFormato")){
-        //$allformatos = $formato->getAll("idArchivo");
-        $this->redirect("Formatos", "index");
-      }
-      else {
-        trigger_error("Fatal error", E_USER_ERROR);
-      }
+    public function borrar () {
+        $id = $_POST["id"];  
+        $pregunta = new Pregunta($this->adapter);
+        $consulta = new Consultas($this->adapter);
+        $criterio = new Criterio($this->adapter);
+        $resPreguntas = $pregunta->getById($id, "idPregunta");
+        $allConsultas = $consulta->getBy("idPregunta", $id);
+        if (count($allConsultas) > 0){
+            foreach ($allConsultas as $con) {
+                $allCriterios = $criterio->getBy("idConsulta", $con->idConsulta);
+                if (count($allCriterios) > 0){
+                    foreach ($allCriterios as $crit) {
+                        $criterio->deleteById($crit->idCriterio,"idCriterio");
+                    }
+                }
+                $consulta->deleteById($con->idConsulta, "idConsulta");
+            }
+        }
+        $pregunta->deleteById($resPreguntas->idPregunta, "idPregunta");
     }
 
 

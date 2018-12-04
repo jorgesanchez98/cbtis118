@@ -16,12 +16,12 @@
 					<ul class="nav flex-column">
 						<li class="nav-item"><a class="nav-link" href="<?php echo $helper->url("Formatos","index"); ?>"><i class="fas fa-file-alt"></i>Formatos</a></li>
 					</ul>
-					<span class="tituloNav">Reportes</span>
+					<!--<span class="tituloNav">Reportes</span>
 					<ul class="nav flex-column">
 						<li class="nav-item"><a class="nav-link" href="<?php echo $helper->url("Reportes","index"); ?>"> <i class="fas fa-folder-plus"></i>Generar Reportes</a></li>
-						<!--<li class="nav-item"><a class="nav-link" href="index.php?module=graficas"> <i class="fas fa-folder-plus"></i>Generar Graficas</a></li>-->
+						<li class="nav-item"><a class="nav-link" href="index.php?module=graficas"> <i class="fas fa-folder-plus"></i>Generar Graficas</a></li>
 
-					</ul>
+					</ul>-->
 					<!--<span class="tituloNav">Inventario</span>
 					<ul class="nav flex-column">
 						<li class="nav-item"><a class="nav-link" href="<?php echo $helper->url("Inventario","index"); ?>"> <i class="fas fa-file-alt"></i>Inventarios</a></li>
@@ -31,7 +31,7 @@
 					<span class="tituloNav">Administración</span>
 					<ul class="nav flex-column">
 						<li class="nav-item"><a class="nav-link" href="<?php echo $helper->url("Usuarios","index"); ?>"> <i class="fas fa-user-alt"></i>Usuarios</a></li>
-						<li class="nav-item"><a class="nav-link" href="<?php echo $helper->url("Roles","index"); ?>"> <i class="fas fa-file-alt"></i>Roles</a></li>
+						<!--<li class="nav-item"><a class="nav-link" href="<?php echo $helper->url("Roles","index"); ?>"> <i class="fas fa-file-alt"></i>Roles</a></li>-->
 					</ul>
 					<span class="tituloNav">Configuración</span>
 					<ul class="nav flex-column">

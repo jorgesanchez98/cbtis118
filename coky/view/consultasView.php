@@ -6,6 +6,7 @@
 </head>
 <body>
 	<?php include 'asideView.php'; ?>
+  <input type="hidden" name="rowColor" id="rowColor" value="1">
 	<input type="hidden" name="idFormato" id="idFormato" value="<?php echo $idFormato ?>">
 	<main class="col-md-10 ml-sm-auto col-lg-10 col-xl-10 px-4">
 		<section class="row backButton">
@@ -28,6 +29,7 @@
 							<button type="button" data-toggle="modal" data-target="#modal"> <i class="fas fa-plus iconButton"></i>Agregar</button>
 							<button id="editarConsulta"> <i class="fas fa-edit iconButton"></i> Editar</button>
 							<button id="borrarConsulta"> <i class="fas fa-trash-alt iconButton" ></i> Borrar</button>
+              <button id="visualizarConsulta"> <i class="fas fa-eye"></i> Visualizar</button>
 						</section>
 						<section class="row">
 							<table class="table">
@@ -45,6 +47,23 @@
 							</tbody>
 							</table>
 						</section>
+            <div class="modal fade" id="visualizarCon" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLongTitle">Visualizar Consulta</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                  </div>
+                  <div class="modal-body">
+                      <div id="tableConsulta">
+                        
+                      </div>
+                  </div>
+                </div>
+            </div>  
+          </div>
 						<div class="modal autoModal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   						<div class="modal-dialog modal-lg" role="dialog">
     						<div class="modal-content">
@@ -71,10 +90,12 @@
             										<div class="col-9">
 														<select class="form-control" name="criteria[]">
     														<option selected value="0"></option>
-    														<option value="1"> Total</option>
-    														<option value="2"> Sexo</option>
-    														<option value="3"> Calificacion</option>
-    														<option value="4"> Carrera</option>
+    														<option value="1"> Sexo</option>
+    														<option value="2"> Carrera</option>
+                                <option value="3"> Turno</option>
+                                <option value="4"> Materias Aprobadas</option>
+                                <option value="5"> Materias Reprobadas</option>
+                                <option value="6"> Nacido en el Extranjero</option>
     													</select>
     												</div>
     											</div>

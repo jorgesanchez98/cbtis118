@@ -35,8 +35,11 @@ class ImportarController extends ControladorBase{
       require_once "core/Classes/PHPExcel.php";
       require_once "core/ChunkReadFilter.php";
 
-      $file = "5be75839705108.44467296";
-      $tmpfname = "baseDatos/excel/".$file.".xls";
+      $file = new Archivo($this->adapter);
+      $resFile = $file->getById($_POST["id"], "idArchivo");
+
+      $fileNameNew = $resFile->ruta;
+      $tmpfname = "baseDatos/excel/".$fileNameNew;
       libxml_use_internal_errors(true);
 
       $inputFileType = PHPExcel_IOFactory::identify($tmpfname);
@@ -58,22 +61,39 @@ class ImportarController extends ControladorBase{
 
       for ($i = 1; $i < count($sheetData); $i++){
         if (array_key_exists($sheetData[$i+1]["L"], $estudiantes)){
+            if ($sheetData[$i+1]["Q"] > 5){
             $estudiantes[$sheetData[$i+1]["L"]][6] += 1;
-            $estudiantes[$sheetData[$i+1]["L"]][7] += $sheetData[$i+1]["Q"];
+          }
+          else {
+            $estudiantes[$sheetData[$i+1]["L"]][7] += 1;
+          }
         }
         else {
-          $estudiantes[$sheetData[$i+1]["L"]] = array($sheetData[$i+1]["L"],$sheetData[$i+1]["L"][10], $sheetData[$i+1]["D"], $sheetData[$i+1]["E"], $sheetData[$i+1]["C"], $sheetData[$i+1]["F"], 1, $sheetData[$i+1]["Q"]);
+          $n = 0;
+          if($sheetData[$i+1]["L"][11] == 'N' && $sheetData[$i+1]["L"][12] == 'E'){
+            $n = 1;
+          }
+          $estudiantes[$sheetData[$i+1]["L"]] = array($sheetData[$i+1]["L"],$sheetData[$i+1]["L"][10], $sheetData[$i+1]["D"], $sheetData[$i+1]["E"], $sheetData[$i+1]["C"], $sheetData[$i+1]["F"], 1, 1, $n);
+          if ($sheetData[$i+1]["Q"] > 5){
+            $estudiantes[$sheetData[$i+1]["L"]][6] = 1;
+            $estudiantes[$sheetData[$i+1]["L"]][7] = 0;
+          }
+          else {
+            $estudiantes[$sheetData[$i+1]["L"]][6] = 0;
+            $estudiantes[$sheetData[$i+1]["L"]][7] = 1;
+          }
         }
       }
 
       $alumno = new Alumno($this->adapter);
+      $alumno->ejecutarSql("TRUNCATE TABLE alumnos");
       $result = $alumno->save($estudiantes);
       
       if ($result){
-        echo "success";
+        echo ",success";
       }
       else {
-        echo "no";
+        echo ",no";
       }
     }
 
@@ -112,7 +132,15 @@ class ImportarController extends ControladorBase{
                }
             }
         } 
-      $this->redirect("Index", "index");
+      $this->redirect("Importar", "index");
+    }
+
+    public function getArchivo () {
+        $id = $_GET["id"];
+        $archivo = new Archivo($this->adapter);
+        $resArchivo = $archivo->getById($id, "idArchivo");
+        echo ",";
+        echo $resArchivo->ruta;
     }
 
     public function borrar ($id) {

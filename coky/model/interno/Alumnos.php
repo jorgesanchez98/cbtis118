@@ -26,7 +26,8 @@
                 $sql .= $alumno[4]."', '";
                 $sql .= $alumno[5]."', '";
                 $sql .= $alumno[6]."', '";
-                $sql .= $alumno[7]."'), ";
+                $sql .= $alumno[7]."', '";
+                $sql .= $alumno[8]."'), ";
             }
             $sql = substr($sql, 0, -1);
             $sql = substr($sql, 0, -1);

@@ -40,16 +40,33 @@ class FormatosController extends ControladorBase{
         $this->redirect("Formatos", "index");
     }
 
-    public function borrar ($id) {
-      $formato = new Formato($this->adapter);
-
-      if ($formato->deleteById($id, "idFormato")){
-        //$allformatos = $formato->getAll("idArchivo");
-        $this->redirect("Formatos", "index");
-      }
-      else {
-        trigger_error("Fatal error", E_USER_ERROR);
-      }
+    public function borrar () {
+        $id = $_POST["id"];
+        $formato = new Formato($this->adapter);
+        $pregunta = new Pregunta($this->adapter);
+        $consulta = new Consultas($this->adapter);
+        $criterio = new Criterio($this->adapter);
+        $resFormato = $formato->getById($id, "idFormato");
+        $allPreguntas = $pregunta->getBy("idFormato", $id);
+        if (count($allPreguntas) > 0){
+            foreach ($allPreguntas as $pre) {
+                $allConsultas = $consulta->getBy("idPregunta", $pre->idPregunta);
+                if (count($allConsultas) > 0){
+                    foreach ($allConsultas as $con) {
+                        $allCriterios = $criterio->getBy("idConsulta", $con->idConsulta);
+                        if (count($allCriterios) > 0){
+                            foreach ($allCriterios as $crit) {
+                                $criterio->deleteById($crit->idCriterio,"idCriterio");
+                            }
+                        }
+                        $consulta->deleteById($con->idConsulta, "idConsulta");
+                    }
+                }
+                $pregunta->deleteById($pre->idPregunta, "idPregunta");
+            }
+        }
+        $formato->deleteById($resFormato->idFormato, "idFormato");
+        
     }
 
 }

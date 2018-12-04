@@ -6,6 +6,7 @@
 </head>
 <body>
 	<?php include 'asideView.php'; ?>
+	<input type="hidden" name="rowColor" id="rowColor" value="1">
 	<main class="col-md-10 ml-sm-auto col-lg-10 col-xl-10 px-4">
 	<div class="d-flex justify-content-between flex-wrap text-white flex-md-nowrap align-items-center pl-5 pt-3 pb-2 mb-3 border-bottom">
 			<h1 class="titulo">Formatos</h1>
@@ -15,8 +16,7 @@
 							<button type="button" data-toggle="modal" data-target="#exampleModalCenter"> <i class="fas fa-plus iconButton"></i>Agregar</button>
 							<button id="editarFormato"> <i class="fas fa-edit iconButton"></i> Editar</button>
 							<button id="borrarFormato"> <i class="fas fa-trash-alt iconButton" ></i> Borrar</button>
-							<button> <i class="fas fa-download iconButton"></i>Descargar</button>
-							<input class="buscarButton" type="text" name="buscar" placeholder="Buscar">
+							<button id="visualizarFormato"> <i class="fas fa-eye"></i> Visualizar</button>
 						</section>
 						<section class="row">
 							<table class="table">
@@ -49,12 +49,12 @@
        								<form action="<?php echo $helper->url("Formatos", "subirFormato")?>" method="POST" enctype="multipart/form-data">
        									<div class="form-group">
        										<label for="exampleInputEmail1">Nombre</label>
-    										<input type="text" class="form-control" name="nombre" aria-describedby="emailHelp">
+    										<input type="text" class="form-control" name="nombre" aria-describedby="emailHelp" autocomplete="off">
     									</div>
     									<div class="form-row form-group">
     										<div class="col">
     											<label> Descripción</label>
-    											<input type="text" class="form-control" name="descripcion" aria-describedby="emailHelp">
+    											<input type="text" class="form-control" name="descripcion" aria-describedby="emailHelp" autocomplete="off">
     										</div>
     									</div>
        									<div class="modal-footer">

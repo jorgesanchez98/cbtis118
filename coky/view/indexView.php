@@ -6,6 +6,7 @@
 </head>
 <body>
 	<?php include 'asideView.php'; ?>
+	<input type="hidden" name="rowColor" id="rowColor" value="1">
 	<main class="col-md-9 ml-sm-auto col-lg-10 col-xl-10 px-4" id="main">
 	<div class="d-flex justify-content-between flex-wrap text-white flex-md-nowrap align-items-center pl-5 pt-3 pb-2 mb-3 border-bottom">
 		<h1 id="titulo">Detalle Calificaciones</h1>
@@ -13,7 +14,7 @@
 				<div class="container-full">
 
 					<section class="row">
-						<button onclick="location.href= '<?php echo $helper->url("Importar","cargarBaseDatos"); ?>'"> <i class="fas fa-database iconButton"></i> Cargar a Base de Datos</button>
+						<button id="cargarBaseDatos"> <i class="fas fa-database iconButton"></i> Cargar a Base de Datos</button>
 						<button type="button" data-toggle="modal" data-target="#exampleModalCenter"> <i class="fas fa-upload iconButton"></i>Importar</button>
 						<button onclick="location.href= 'baseDatos/excel/5be75839705108.44467296.xls'"> <i class="fas fa-download iconButton"></i>Descargar</button>
 						<button id="borrar"> <i class="fas fa-trash-alt iconButton"></i> Borrar</button>

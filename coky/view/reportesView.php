@@ -6,6 +6,7 @@
 </head>
 <body>
 	<?php include 'asideView.php'; ?>
+  <input type="hidden" name="rowColor" id="rowColor" value="1">
 	<main class="col-md-9 ml-sm-auto col-lg-10 col-xl-10 px-4">
 		<div class="d-flex justify-content-between flex-wrap text-white flex-md-nowrap align-items-center pl-5 pt-3 pb-2 mb-3 border-bottom">
 			<h1 class="titulo">Consulta</h1>
