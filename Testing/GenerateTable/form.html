@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Table Generator</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+	</script>
+</head>
+<body>
+		<input type="text" name="query" id="userInput">
+		<a class="refresh"><button>Send</button></a>
+	<div id="newTable">Table</div>
+	<script type="text/javascript">
+		$('.refresh').click(
+			//e.preventDefault();
+		    function(){
+		       $.ajax({
+		          url: "controlla.php?f='hello'",
+		          type: "GET",
+		          success: function(data){
+		        		var table=document.getElementById("newTable");
+		        		table.innerHTML=data;
+		          }
+		       });
+
+		    }
+		);
+	</script>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</body>
+</html>

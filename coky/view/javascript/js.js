@@ -102,6 +102,14 @@ $(document).ready(() => {
 		}
 	});
 
+    $('#borrarUsuario').click(function(){
+        if (selectedId != 0){
+            $.post('index.php', {controller: 'Usuarios', action: 'borrar', id: selectedId}).done(function(data,status){
+                location.reload();
+            });
+        }
+    });
+
 	$('#cargarBaseDatos').click(function(){
 		if (selectedId != 0){
 			$('#loaderModal').modal('show');
@@ -121,6 +129,24 @@ $(document).ready(() => {
 			});
 		}
 	});
+
+    $('#editarModal').click(function(){
+        console.log(selectedId);
+        if (selectedId != 0){
+            $.post('index.php', {controller:'Usuarios', action: 'getUsuario', id: selectedId}).done(function(data,status){
+                var string = data;
+                console.log(string);
+                var strings = string.split(',');
+                document.getElementById('eNombre').value = strings[1];
+                document.getElementById('ePaterno').value = strings[2];
+                document.getElementById('eMaterno').value = strings[3];
+                document.getElementById('eMail').value = strings[4];
+                document.getElementById('idUsuario').value = selectedId;
+            });
+        }
+    });
+
+
 
 	$('#editarConsulta').click(function(){
 		if (selectedId != 0){
