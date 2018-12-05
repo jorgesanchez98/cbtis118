@@ -20,7 +20,7 @@
 				<section class="row">
 							<button type="button" data-toggle="modal" data-target="#exampleModalCenter"> <i class="fas fa-plus iconButton"></i>Agregar</button>
 							<button id="editarPregunta"> <i class="fas fa-edit iconButton"></i> Editar</button>
-							<button id="borrarPregunta"> <i class="fas fa-trash-alt iconButton" ></i> Borrar</button>
+							<button type="button" data-toggle="modal" data-target="#borrarModal"> <i class="fas fa-trash-alt iconButton" ></i> Borrar</button>
 							<button id="visualizarPregunta"> <i class="fas fa-eye"></i> Visualizar</button>
 						</section>
 						<section class="row">
@@ -41,6 +41,26 @@
 							</tbody>
 							</table>
 						</section>
+						<div class="modal fade" id="borrarModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLongTitle">Borrar Archivo</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                  </div>
+                  <div class="modal-body">
+                      <p> ¿Estás seguro que quieres borrar la pregunta?</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="borrarPregunta">Borrar</button>
+                  </div>
+              </div>
+            </div>
+          </div>
+
 						<div class="modal fade" id="visualizarPreguntaModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
               <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
